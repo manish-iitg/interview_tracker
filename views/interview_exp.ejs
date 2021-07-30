@@ -1,0 +1,38 @@
+<div class="wide wow-animation" lang="en">
+<%- include('partials/header'); -%>
+<head>
+  <title>Comapnies</title>
+</head>
+<section class="section section-intro context-dark">
+  <div class="intro-bg" style="background: url(images/intro-bg-2.jpg) no-repeat;background-size:cover;background-position: top center;"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-8 text-center">
+        <h1 class="font-weight-bold wow fadeInLeft">Companies</h1>
+        <p class="intro-description wow fadeInRight">Explore the past Interview Experiences Here!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <% for(var c=0 ; c<Company.length ; c++){ %>
+  <section class="section section-sm position-relative" id="about">
+    <div class="container">
+      <div class="row row-30">
+        <div class="col-lg-6">
+          <div class="block-decorate-img wow fadeInLeft" data-wow-delay=".2s"><img src=" <%= Company[c].img_url %>" alt="<%= Company[c].name %>" width="350" height="350"/>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12">
+          <div class="block-sm offset-top-45">
+            <h3 class="wow fadeInLeft text-capitalize devider-bottom" data-wow-delay=".3s"><span class="text-primary"><%= Company[c].name %></span></h3></a>
+            <p class="offset-xl-40 wow fadeInUp" data-wow-delay=".4s">Some short description of the Company. This is a Top firm in Technology and Innovation ....</p>
+            <a class="button-width-190 button-primary button-circle button-lg button offset-top-30" href="/interview_exp/<%= Company[c].name %>">explore</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <% } %>
+<%- include('partials/footer'); -%>
+</div>

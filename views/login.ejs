@@ -1,0 +1,96 @@
+
+<div class="wide wow-animation" lang="en">
+  <%- include('partials/header'); -%>
+
+  <head>
+    <title>Login</title>
+  </head>
+
+      <section class="section section-intro context-dark">
+        <div class="intro-bg" style="background: url(images/intro-bg-1.jpg) no-repeat;background-size:cover;background-position: top center;"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-8 text-center">
+              <h1 class="font-weight-bold wow fadeInLeft">Login</h1>
+              <p class="intro-description wow fadeInRight">Welcome back !</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--Mailform-->
+      <section class="section section-md">
+        <div class="container">
+
+          <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-8 col-12">
+              <form class="rd-mailform text-left"  method="post" action="/login">
+                
+                <div class="form-wrap">
+                  <label class="form-label" for="contact-email">E-Mail<span class="req-symbol">*</span></label>
+                  <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">
+                </div>
+                <div class="email error"></div>
+                <div class="form-wrap">
+                  <label class="form-label" for="contact-name">Password<span class="req-symbol">*</span></label>
+                  <input class="form-input" id="contact-name" type="password" name="password" data-constraints="@Required">
+                </div>
+                <div class="password error"></div>
+                <div class="form-button group-sm text-center text-lg-left">
+                  <button class="button button-primary" type="submit">Login</button>
+                </div>
+                <div style="margin-top: 20px;">
+                  <p>Need an account? 
+                    <a href="/signup"  style="color: coral;">SignUp!</a>
+                    </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <%- include('partials/footer'); -%>
+</div>
+
+
+<script>
+
+  const form = document.querySelector('form');
+  const emailError = document.querySelector('.email.error');
+  const passwordError = document.querySelector('.password.error');
+
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); 
+
+     emailError.textContent = '';
+    passwordError.textContent = '';
+
+
+    // get values
+    const email = form.email.value;
+    const password = form.password.value;
+
+     try {
+        const res = await fetch('/login', { 
+          method: 'POST', 
+          body: JSON.stringify({ email, password }),
+          headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+
+        if (data.errors) {
+          emailError.textContent = data.errors.email;
+          passwordError.textContent = data.errors.password;
+        }
+        if (data.user) {
+          location.assign('/');  
+        }
+      }
+     catch (err) {
+        console.log(err);
+      }
+    
+  });
+  </script>

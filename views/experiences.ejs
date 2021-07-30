@@ -1,0 +1,207 @@
+<div class="wide wow-animation" lang="en">
+  <%- include('partials/header'); -%>
+  <head>
+    <title><%= name %></title>
+    <link rel="stylesheet" href="/css/modal_form.css">
+  </head>
+  <body>
+  <section class="section section-intro context-dark">
+    <div class="intro-bg" style="background: url(images/intro-bg-2.jpg) no-repeat;background-size:cover;background-position: top center;"></div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-8 text-center">
+          <h1 class="font-weight-bold wow fadeInLeft"><%= name %></h1>
+          <p class="intro-description wow fadeInRight">Explore the past Interview Experiences Here!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <% for(var e=0 ; e<exp.length ; e++){ %>
+    <section class="section section-sm position-relative" id="about">
+      <div class="container">
+        <div class="row row-30">
+          <div class="col-lg-6">
+            <div class="block-decorate-img wow fadeInLeft" data-wow-delay=".2s"><img style="border-radius: 50%;" src=" <%= exp[e].img %>" alt="<%= exp[e].name %>" width="350" height="350"/>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="block-sm offset-top-45">
+              <h3 class="wow fadeInLeft text-capitalize devider-bottom" data-wow-delay=".3s"><span class="text-primary"><%= exp[e].name  %></span></h3></a>
+              <p class="offset-xl-40 wow fadeInUp" data-wow-delay=".4s"><%= exp[e].intro %></p>
+              <a class="button-width-190 button-primary button-circle button-lg button offset-top-30" href="<%=exp[e].readMore_url%>">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <% } %>
+ 
+  </div>
+
+
+
+<!-- Trigger/Open The Modal -->
+<button class= "button-width-190 buttn-primary button-circle button-lg button offset-top-30" id="myBtn" style="margin: 0 auto; display: block;">add experience</button>
+<div style="margin-top: 200px;"></div>
+</body>
+
+<%- include('partials/footer'); -%>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+        <div class="row justify-content-center">
+          <div class="col-xl-6 col-md-8 col-12">
+            <form class="rd-mailform text-left"  method="post" action="/addexp">
+              
+              <div class="form-wrap">
+                <label class="form-label" for="contact-name">Name<span class="req-symbol">*</span></label>
+                <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
+                <div class="name error"></div>
+              </div>
+            
+
+              <div class="form-wrap">
+                <label class="form-label" for="contact-name">Image URL<span class="req-symbol">*</span></label>
+                <input class="form-input" id="contact-name" type="text" name="img" data-constraints="@Required">
+                <div class="image error"></div>
+              </div>
+         
+
+              <div class="form-wrap">
+                <label class="form-label" for="contact-name">College<span class="req-symbol">*</span></label>
+                <input class="form-input" id="contact-name" type="text" name="college" data-constraints="@Required">
+                <div class="college error"></div>
+              </div>
+
+              
+              <div class="form-wrap">
+                <label class="form-label" for="contact-name">Introduction<span class="req-symbol">*</span></label>
+                <input class="form-input" id="contact-name" type="text" name="intro" data-constraints="@Required">
+                <div class="intro error"></div>
+              </div>
+   
+
+              <div class="form-wrap">
+                <label class="form-label" for="contact-name">Complete Interview URL<span class="req-symbol">*</span></label>
+                <input class="form-input" id="contact-name" type="readMore_url" name="name" data-constraints="@Required">
+                <div class="readMore_url error"></div>
+              </div>
+   
+
+              <div class="form-button group-sm text-center text-lg-left">
+                <button class="button button-primary" type="submit">Submit</button>
+              </div>
+              <div style="margin-top: 100px;"></div>
+            </form>
+          </div>
+        </div>
+  </div>
+
+<script>
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+  nameError.textContent = '';
+  collegeError.textContent = '';
+  introError.textContent = '';
+  readMore_urlError.textContent = '';
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+const form = document.querySelector('form');
+
+const nameError = document.querySelector('.name.error');
+const collegeError = document.querySelector('.college.error');
+const introError = document.querySelector('.intro.error');
+const readMore_urlError = document.querySelector('.readMore_url.error');
+
+/*
+document.querySelector('.button').addEventListener("click", () => {
+  document.querySelector('.addques').style.display = "flex";
+});
+
+  document.querySelector('.close').addEventListener("click", () => {
+    document.querySelector('.addques').style.display = "none";  
+
+    form.name.value = '';
+    form.img.value = '';
+    form.college.value = '';
+    form.intro.value = ''
+    form.readMore_url.value = ''
+
+    
+});
+
+*/
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // reset errors
+    nameError.textContent = '';
+    collegeError.textContent = '';
+    introError.textContent = '';
+    readMore_urlError.textContent = '';
+
+
+    // get values
+   const name = form.name.value;
+   const img = form.img.value;
+   const college = form.college.value;
+    const intro = form.intro.value;
+    const readMore_url = form.readMore_url.value;
+   
+    try {
+        const res = await fetch('/addexp', { 
+          method: 'POST', 
+          //the body we are sending is json stringify version 
+          body: JSON.stringify({ name,img, college, intro, readMore_url }),
+          headers: {'Content-Type': 'application/json'} // through this we know that json data is going to be sent to the server
+        });
+        const data = await res.json();
+
+        if (data.errors) {
+          nameError.textContent = data.errors.name;
+          collegeError.textContent = data.errors.college;
+          introError.textContent = data.errors.intro;
+          readMore_urlError.textContent = data.errors.readMore_url;
+        }
+        //if there is a valid user we are relocating them to the homepage
+        if (data.exp) {
+          location.assign('/');  
+        }
+      }
+     catch (err) {
+        console.log(err);
+      }
+  })
+
+</script>

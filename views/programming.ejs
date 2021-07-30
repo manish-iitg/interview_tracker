@@ -1,0 +1,61 @@
+
+<div class="wide wow-animation" lang="en">
+  <%- include('partials/header'); -%>
+  <head>
+    <title>Practice</title>
+  </head>
+
+  <section class="section section-intro context-dark">
+    <div class="intro-bg" style="background: url(images/intro-background-2.jpg) no-repeat;background-size:cover;background-position: top center;"></div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-8 text-center">
+          <h1 class="font-weight-bold wow fadeInLeft">Coding Topics</h1>
+          <p class="intro-description wow fadeInRight">Practice Hard and Reap results!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% for(var q=0 ; q<topics.length; q++){ %>
+  <!--Image Left-->
+    <section class="section section-lg bg-default">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-xl-8">
+            <h2 class="wow fadeInRight text-capitalize devider-bottom" data-wow-delay=".3s"><span class="text-primary"><%= topics[q].name %></span></h2>
+            <div class="row row-30">
+              <div class="col-md-6"><img src="images/faang.jpg" alt="" width="770" height="207"/>
+              </div>
+              <div class="col-md-6">
+                <p>Welcome to our wonderful world. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                <a class="button-width-190 button-primary button-circle button-lg button offset-top-30" href="/programming/<%= topics[q++].name %> ">explore</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <% if(q<topics.length){ %>
+  <!--Image Right-->
+    <section class="section section-lg bg-default">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-xl-8">
+           <a  href= "/programming/<%= topics[q].name %> " ><h2 class="wow fadeInLeft text-capitalize devider-bottom" data-wow-delay=".3s"><span class="text-primary"><%= topics[q].name %></span></h2></a>
+            <div class="row row-30 flex-md-row-reverse">
+              <div class="col-md-6"><img src="images/faang.jpg" alt="" width="770" height="207"/>
+              </div>
+              <div class="col-md-6">
+                <p>Welcome to our wonderful world. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                <a class="button-width-190 button-primary button-circle button-lg button offset-top-30" href="/programming/<%= topics[q].name %> ">explore</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  <% } %>
+  <%- include('partials/footer'); -%>
+</div>
+

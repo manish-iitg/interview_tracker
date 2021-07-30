@@ -1,0 +1,105 @@
+
+<div class="wide wow-animation" lang="en">
+  <%- include('partials/header'); -%>
+
+  <head>
+    <title>SignUp</title>
+  </head>
+
+      <section class="section section-intro context-dark">
+        <div class="intro-bg" style="background: url(images/intro-bg-1.jpg) no-repeat;background-size:cover;background-position: top center;"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-8 text-center">
+              <h1 class="font-weight-bold wow fadeInLeft">SignUp</h1>
+              <p class="intro-description wow fadeInRight">Hi, Register Here !</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--Mailform-->
+      <section class="section section-md">
+        <div class="container">
+
+          <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-8 col-12">
+              <form class="rd-mailform text-left"  method="post" action="/signup">
+                <div class="form-wrap">
+                  <label class="form-label" for="contact-email">E-Mail<span class="req-symbol">*</span></label>
+                  <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required">
+                </div>
+                <div class="email error"></div>
+                <div class="form-wrap">
+                  <label class="form-label" for="contact-name">Password<span class="req-symbol">*</span></label>
+                  <input class="form-input" id="contact-name" type="password" name="password" data-constraints="@Required">
+                </div>
+                <div class="password error"></div>
+                <div class="form-button group-sm text-center text-lg-left">
+                  <button class="button button-primary" type="submit">Sign Up</button>
+                </div>
+                <div style="margin-top: 20px;">
+                  <p>Already Have an account? 
+                    <a href="/login"  style="color: coral;">Login!</a>
+                    </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <%- include('partials/footer'); -%>
+</div>
+
+<script>
+
+  const form = document.querySelector('form');
+  const emailError = document.querySelector('.email.error');
+  //now emailError has hold of the div with classes email,error
+  const passwordError = document.querySelector('.password.error');
+//now passwordError has hold of the div with classes password,error
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();  //this will prevent the browser to do the default activity (that is to reload) after the sumit event
+
+     // reset errors
+     emailError.textContent = '';
+    passwordError.textContent = '';
+
+    // get values
+    const email = form.email.value;
+    const password = form.password.value;
+
+     try {
+        const res = await fetch('/signup', { //the fetch api is used to send HTTP requests to the route mentioned as its first
+          //argument.
+          method: 'POST', 
+          //the body we are sending is json stringify version 
+          body: JSON.stringify({ email, password }),
+          headers: {'Content-Type': 'application/json'} // through this we know that json data is going to be sent to the server
+        });
+        const data = await res.json();
+        //if there is an error we are outputing those
+        if (data.errors) {
+          emailError.textContent = data.errors.email;
+          passwordError.textContent = data.errors.password;
+        }
+        //if there is a valid user we are relocating them to the homepage
+        if (data.user) {
+          location.assign('/');  //this is used to redirect the user to the home page once signed up
+        }
+      }
+     catch (err) {
+        console.log(err);
+      }
+      
+    //NOW IF THERE IS SOME ERROR IN THE FETCH API ENDPOINT THEN THE CATCH BLOCK EXECUTES
+    //the(err) identifier is only available in the catch-block's scope. If you don't need the exception value, it could be omitted.
+    /*Any given exception will be caught only once by the nearest enclosing catch-block unless it is rethrown.
+     Of course, any new exceptions can raised in the "inner" block
+      (because the code in catch-block may do something that throws), will be caught by the "outer" block. */
+    
+  });
+
+</script>

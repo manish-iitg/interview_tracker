@@ -1,0 +1,231 @@
+<div class="wide wow-animation" lang="en">
+  <%- include ('partials/header'); -%>
+
+  <head>
+    <link rel="stylesheet" href="/css/modal_form.css">
+    <title><%= name %></title>
+   </head>
+
+      <section class="section section-intro context-dark">
+        <div class="intro-bg" style="background: url() no-repeat;background-size:cover;background-position: top center;"></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-8 text-center">
+              <h1 class="font-weight-bold wow fadeInLeft"><%= name %></h1>
+              <p class="intro-description wow fadeInRight">Practice Hard and Reap results!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Base typography -->
+      <section class="section section-lg bg-default">
+        <div class="container">
+          <div class="row row-50 flex-lg-row-reverse">
+            <div class="col-xl-8">
+              <ul class="list-xl">   
+                <% for(var q=0; q<ques.length; q++){ %>
+                  <li>
+                    <a href="<%= ques[q].Link %>"><h3><%= ques[q].Name %></h3></a>
+                  </li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>     
+      
+      
+      <!--Blockquote-->
+      <section class="section section-lg bg-default">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-lg-10 col-xl-8">
+              <h3>Blockquote</h3>
+              <!--Quote Primary-->
+              <article class="quote-primary">
+                <div class="quote-primary-body">
+                  <svg class="quote-primary-mark" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="21px" height="15px" viewbox="0 0 21 15" overflow="scroll" xml:space="preserve" preserveAspectRatio="none">
+                    <path d="M9.597,10.412c0,1.306-0.473,2.399-1.418,3.277c-0.944,0.876-2.06,1.316-3.349,1.316 c-1.287,0-2.414-0.44-3.382-1.316C0.482,12.811,0,11.758,0,10.535c0-1.226,0.58-2.716,1.739-4.473L5.603,0H9.34L6.956,6.37 C8.716,7.145,9.597,8.493,9.597,10.412z M20.987,10.412c0,1.306-0.473,2.399-1.418,3.277c-0.944,0.876-2.06,1.316-3.35,1.316 c-1.288,0-2.415-0.44-3.381-1.316c-0.966-0.879-1.45-1.931-1.45-3.154c0-1.226,0.582-2.716,1.74-4.473L16.994,0h3.734l-2.382,6.37 C20.106,7.145,20.987,8.493,20.987,10.412z"></path>
+                  </svg>
+                  <div class="quote-primary-text">
+                    <p class="q">Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                  </div>
+                </div>
+                <div class="quote-primary-footer">
+                  <p class="heading-5 quote-primary-cite">Dennis Williams</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!--Icon List-->
+      <section class="section section-lg bg-default">
+        <div class="container">
+          <h3>Features List</h3>
+          <div class="row row-30">
+            <div class="cell-xs-10 col-md-6 col-lg-4">
+              <article class="box-minimal">
+                <div class="box-minimal-icon fa fa-thumbs-up"></div>
+                <h4 class="box-minimal-title">Best Service</h4>
+                <div class="box-minimal-text">
+                  <p>Our mission is to attract and retain customers by providing Best in Class solutions and fostering a profitable, disciplined culture of safety, service, and trust.</p>
+                </div>
+              </article>
+            </div>
+            <div class="cell-xs-10 col-md-6 col-lg-4">
+              <article class="box-minimal">
+                <div class="box-minimal-icon fa fa-group"></div>
+                <h4 class="box-minimal-title">Reputation</h4>
+                <div class="box-minimal-text">
+                  <p>We have established a strong presence in the industry. Our award-winning services earn a reputation for quality and excellence that few can rival.</p>
+                </div>
+              </article>
+            </div>
+            <div class="cell-xs-10 col-md-6 col-lg-4">
+              <article class="box-minimal">
+                <div class="box-minimal-icon fa fa-lock"></div>
+                <h4 class="box-minimal-title">Safety & Security</h4>
+                <div class="box-minimal-text">
+                  <p>Safety for our employees, customers and the community we work with will always remain our primary focus in all the policies, procedures and programs.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+<!-- Trigger/Open The Modal -->
+<button class= "button-width-190 button-primary button-circle button-lg button offset-top-30" id="myBtn" style="margin: 0 auto; display: block;">add question</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+        <div class="row justify-content-center">
+          <div class="col-xl-6 col-md-8 col-12">
+            <form class="rd-mailform text-left"  method="post" action="/addquestion">
+              
+              <div class="form-wrap">
+                <label class="form-label" for="contact-name">Name<span class="req-symbol">*</span></label>
+                <input class="form-input" id="contact-name" type="text" name="Name" data-constraints="@Required">
+                <div class="Name error"></div>
+              </div>
+              
+              <div class="form-wrap">
+                <label class="form-label" for="contact-name">Link<span class="req-symbol">*</span></label>
+                <input class="form-input" id="contact-name" type="text" name="Link" data-constraints="@Required">
+                <div class="Link error"></div>
+              </div>
+
+              <div class="form-button group-sm text-center text-lg-left">
+                <button class="button button-primary" type="submit">Submit</button>
+              </div>
+              <div style="margin-top: 100px;"></div>
+            </form>
+          </div>
+        </div>
+  </div>
+
+</div>
+
+   <div style="margin-top: 200px;"></div>
+   <%- include('partials/footer'); -%>
+</div>
+
+<script>
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+  nameError.textContent = '';
+  linkError.textContent = '';
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+const form = document.querySelector('form');
+  //console.log(Name, Link);
+const nameError = document.querySelector('.Name.error');
+const linkError = document.querySelector('.Link.error');
+
+/*
+document.querySelector('.randomadd').addEventListener("click", () => {
+  document.querySelector('.addQues').style.display = "flex";
+});
+
+  document.querySelector('.close').addEventListener("click", () => {
+    document.querySelector('.addQues').style.display = "none";  
+ 
+});
+
+
+*/
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // reset errors
+    nameError.textContent = '';
+    linkError.textContent = '';
+
+    console.log('yay!');
+    // get values
+    const Name = form.Name.value;
+    const Link = form.Link.value;
+
+    try {
+        const res = await fetch('/addquestion', { //the fetch api is used to send HTTP requests to the route mentioned as its first
+          //argument.
+          method: 'POST', 
+          //the body we are sending is json stringify version 
+          body: JSON.stringify({ Name, Link }),
+          headers: {'Content-Type': 'application/json'} // through this we know that json data is going to be sent to the server
+        });
+        const data = await res.json();
+        console.log(data.errors);
+
+        if (data.errors) {
+          nameError.textContent = data.errors.Name;
+          linkError.textContent = data.errors.Link;
+        }
+        //if there is a valid user we are relocating them to the homepage
+
+        if (data.ques) {
+          location.assign('/programming/'+data.name);  
+          if(admin){
+          alert('Question Successfully Added');
+        }else{
+          alert('Your question has been successfully submitted. It will be displayed once approved by the admin.');
+        }
+        }
+      }
+     catch (err) {
+        console.log(err);
+      }
+  })
+
+</script>
