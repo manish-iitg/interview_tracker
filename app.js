@@ -20,7 +20,7 @@ const app = express();
 
 //mongodb(NoSQL) database connection using mongoose
 // create this connection string(database that is hoisted online) on mongodb.com using clusters
-const dbURI = 'mongodb+srv://Manish:test123123@cluster0.moy8o.mongodb.net/test';
+const dbURI = 'mongodb+srv://Manish:<password>@cluster0.moy8o.mongodb.net/test';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
 // this options obj allows us to run the code without any deprication,warning, etc
 // once the connection is successful, only then the app listens to the requests made at the client side using port 3000
